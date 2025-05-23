@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import os
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,6 +28,7 @@ SECRET_KEY = 'django-insecure-e^akvz#!c-!evi*@*o31f79=5k76ug-9yq%#$^m-=2oeu-p%xb
 DEBUG = True
 
 ALLOWED_HOSTS = []
+print("ALLOWED_HOSTS: ", config('RDS_DB_NAME'))
 
 # Application definition
 
@@ -90,26 +93,28 @@ WSGI_APPLICATION = 'hotelReservations.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+# Database configuration
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': config('RDS_DB_NAME', ''),
+        'USER': config('RDS_USERNAME', ''),
+        'PASSWORD': config('RDS_PASSWORD', ''),
+        'HOST': config('RDS_HOSTNAME', ''),
+        'PORT': config('RDS_PORT', ''),
     }
 }
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'databese',
-#         'USER': 'admin',
-#         'PASSWORD': 'root.',
-#         'HOST': 'localhost',
-#         'PORT': '3306',
-#         'OPTIONS': {
-#             'ssl': {'ca': '/cert/BaltimoreCyberTrustRoot.crt.pem'},  # para Azure
-#         },
-#     }
-# }
+# AWS S3 configuration
+AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
+AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
+
+# Static files configuration
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
+STATIC_URL = '/static/'
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
