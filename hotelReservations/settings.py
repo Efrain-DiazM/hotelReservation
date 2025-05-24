@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-e^akvz#!c-!evi*@*o31f79=5k76ug-9yq%#$^m-=2oeu-p%xb
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["3.87.203.122", "localhost"]
+ALLOWED_HOSTS = ["54.226.142.54", "localhost"]
 print("ALLOWED_HOSTS: ", config('RDS_DB_NAME'))
 
 # Application definition
