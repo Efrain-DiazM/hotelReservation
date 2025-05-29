@@ -33,9 +33,9 @@ ALLOWED_HOSTS = ['3.87.22.96', 'localhost', '127.0.0.1']
 
 CORS_ALLOW_ALL_ORIGINS = True
 
-CORS_ALLOWED_ORIGINS = [ 
-    'http://localhost:5173' ,
- ]
+CORS_ALLOWED_ORIGINS = [
+    "http://3.87.22.96",
+]
 
 INSTALLED_APPS = [
     'corsheaders',
