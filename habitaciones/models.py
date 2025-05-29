@@ -15,7 +15,12 @@ class Habitacion(models.Model):
     numero_habitacion = models.CharField(max_length=10)
     tipo_habitacion = models.ForeignKey(TipoHabitacion, on_delete=models.CASCADE)
     precio_por_noche = models.DecimalField(max_digits=10, decimal_places=2)
-    estado = models.CharField(max_length=20)
+    ESTADO_CHOICES = [
+        ('disponible', 'Disponible'),
+        ('ocupada', 'Ocupada'),
+        ('mantenimiento', 'Mantenimiento'),
+    ]
+    estado = models.CharField(max_length=20, choices=ESTADO_CHOICES, default='disponible')
 
     class Meta:
         unique_together = ('hotel', 'numero_habitacion')
