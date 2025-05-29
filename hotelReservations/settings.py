@@ -26,7 +26,8 @@ SECRET_KEY = 'django-insecure-e^akvz#!c-!evi*@*o31f79=5k76ug-9yq%#$^m-=2oeu-p%xb
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["54.226.142.54", "localhost"]
+print("ALLOWED_HOSTS: ", config('RDS_DB_NAME'))
 
 # Application definition
 
@@ -100,6 +101,7 @@ WSGI_APPLICATION = 'hotelReservations.wsgi.application'
 #     }
 # }
 
+
 # Database configuration
 DATABASES = {
     'default': {
@@ -112,19 +114,16 @@ DATABASES = {
     }
 }
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'databese',
-#         'USER': 'admin',
-#         'PASSWORD': 'root.',
-#         'HOST': 'localhost',
-#         'PORT': '3306',
-#         'OPTIONS': {
-#             'ssl': {'ca': '/cert/BaltimoreCyberTrustRoot.crt.pem'},  # para Azure
-#         },
-#     }
-# }
+# AWS S3 configuration
+AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
+AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
+
+# Static files configuration
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
+STATIC_URL = '/static/'
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
