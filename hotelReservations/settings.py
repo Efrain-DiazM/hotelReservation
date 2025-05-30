@@ -34,7 +34,7 @@ ALLOWED_HOSTS = ['LB-hotelReservas-89009523.us-east-1.elb.amazonaws.com', '3.87.
 CORS_ALLOW_ALL_ORIGINS = True
 
 CORS_ALLOWED_ORIGINS = [
-    "https://LB-HR-1290489032.us-east-1.elb.amazonaws.com",
+    "https://LB-hotelReservas-89009523.us-east-1.elb.amazonaws.com",
 ]
 
 INSTALLED_APPS = [
