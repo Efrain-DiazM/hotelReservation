@@ -27,14 +27,14 @@ SECRET_KEY = 'django-insecure-e^akvz#!c-!evi*@*o31f79=5k76ug-9yq%#$^m-=2oeu-p%xb
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['3.87.22.96', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['LB-HR-1290489032.us-east-1.elb.amazonaws.com', '3.87.22.96', 'localhost', '127.0.0.1']
 
 # Application definition
 
 CORS_ALLOW_ALL_ORIGINS = True
 
 CORS_ALLOWED_ORIGINS = [
-    "http://3.87.22.96",
+    "https://LB-HR-1290489032.us-east-1.elb.amazonaws.com",
 ]
 
 INSTALLED_APPS = [
