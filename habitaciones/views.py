@@ -125,9 +125,9 @@ class ValidarDisponibilidadYCostoAPIView(APIView):
                     "descuento_fijo": float(promo.descuento_fijo)
                 }
                 if promo.descuento_porcentaje > 0:
-                    descuento = (costo_base * promo.descuento_porcentaje) / 100
+                    descuento = float(costo_base) * float(promo.descuento_porcentaje) / 100
                 elif promo.descuento_fijo > 0:
-                    descuento = promo.descuento_fijo
+                    descuento = float(promo.descuento_fijo)
             except Promocion.DoesNotExist:
                 return Response({'error': 'Código promocional inválido.'}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -136,5 +136,7 @@ class ValidarDisponibilidadYCostoAPIView(APIView):
         return Response({
             'disponible': disponible,
             'costo_total': round(costo_total, 2),
+            'costo_base': round(costo_base, 2),
+            'descuento': round(descuento, 2),
             'promo_info': promo_info
         })
